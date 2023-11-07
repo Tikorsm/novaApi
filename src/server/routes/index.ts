@@ -1,42 +1,15 @@
 
-import {Router} from 'express';
-import {StatusCodes} from 'http-status-codes'
+import { Router } from 'express';
 
 import { CidadesController } from './../controllers'
-
 
 const router = Router();
 
 
-router.get('/', (req, res) => {
+router.get('/cidades', CidadesController.getAllValidation, CidadesController.getAll);
 
-    return res.send('tu é gay cara!')
-})
-
-
-// router.get('/cidades', CidadesController.getAll);
+router.post('/cidades', CidadesController.createValidation, CidadesController.create);
 
 
 
-router.post('/cidades', CidadesController.create);
-
-
-
-
-
-router.put('/', (req, res) => {
-
-    return res.send('tu é gay cara!')
-})
-
-
-
-
-
-router.delete('/', (req, res) => {
-
-    return res.send('tu é gay cara!')
-})
-
-
-export {router}
+export { router }
