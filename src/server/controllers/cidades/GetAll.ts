@@ -14,7 +14,7 @@ interface IQueryProps {
 
 
 export const getAllValidation = validation((getSchema) => ({
-    body: getSchema<IQueryProps>(yup.object().shape({
+    query: getSchema<IQueryProps>(yup.object().shape({
         page: yup.number().moreThan(0),
         limit: yup.number().moreThan(0),
         filter: yup.string(),

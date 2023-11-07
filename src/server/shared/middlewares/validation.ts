@@ -19,17 +19,9 @@ export const validation: TValidation = (getAllSchema) => async (req, res, next) 
 
     const Schemas = getAllSchema((Schema ) => Schema);
     
-    const errorsResult: Record<string, Record<string, string>> = {
-        body:{
-            'nome': 'Nome é obrigatório'
-        },
-        query:{
-            'filter': 'filter é obrigatório'
-        }
-    };
+    const errorsResult: Record<string, Record<string, string>> = {};
 
     Object.entries(Schemas).forEach(([key, Schema]) => {
-
     try {
         Schema.validateSync(req[key as TProperty], { abortEarly: false });
     }
@@ -38,7 +30,7 @@ export const validation: TValidation = (getAllSchema) => async (req, res, next) 
         const errors: Record<string, string> = {};
 
         yupError.inner.forEach(error => {
-            if (!error.path) return;
+            if (error.path === undefined) return;
             errors[error.path] = error.message;
         })
         
@@ -47,13 +39,10 @@ export const validation: TValidation = (getAllSchema) => async (req, res, next) 
     
 });
 
-
 if(Object.entries(errorsResult).length === 0){
- 
-    return next();
+ return next();
 }else{
-
-    return res.status(StatusCodes.BAD_REQUEST).json({ errors: errorsResult })
+ return res.status(StatusCodes.BAD_REQUEST).json({ errors: errorsResult })
 }
 
 };
