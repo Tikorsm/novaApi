@@ -19,7 +19,14 @@ export const deleteByIdValidation = validation((getSchema) => ({
 }));
 
 export const deleteById = async (req: Request<IParamProps>, res: Response) => {
-    console.log(req.params);
     
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('chupa que é de uva melão !');
+    if(Number(req.params.id) === 99999) return res.status(StatusCodes.INTERNAL_SERVER_ERROR ).json({ 
+        
+        errors: {
+        default: 'Registro não econtrado'
+    }
+});
+     
+    
+    return res.status(StatusCodes.NO_CONTENT).send();
 }

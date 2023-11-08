@@ -12,7 +12,7 @@ router.delete('/cidades/:id', CidadesController.deleteByIdValidation, CidadesCon
 router.put('/cidades/:id', CidadesController.UpdateByIdValidation, CidadesController.UpdateById);
 router.post('/cidades', CidadesController.createValidation, CidadesController.create);
 
-
+    
 
 
 export { router }
